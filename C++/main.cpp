@@ -12,20 +12,18 @@ int main(){
     while(true){
         string orden;
         cout << "*************" << endl << "Ingrese orden:" << endl << 
-        "C - Comenzar" << endl <<
+        "E - Empezar" << endl <<
         "P - Parar" << endl <<
-        "E - Reporte" << endl <<
-        "I - Izquierda" << endl <<
-        "D - Derecha" << endl <<
-        "A - Avanzar" << endl <<
-        "R - Retroceder" << endl <<
+        "A - Articulacion A" << endl <<
+        "B - Articulacion B" << endl <<
+        "C - Articulacion C" << endl <<
         "T para terminar" << endl;
         cin >> orden;
         if(orden=="T"){
             delete trayec;
             break;
         }
-        if(orden=="E"){
+        if(orden=="R"){
             emitirReporte(trayec);
             continue;
         }
