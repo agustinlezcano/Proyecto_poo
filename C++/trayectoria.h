@@ -16,6 +16,7 @@ private:
     list <string> Ordenes;
     float distanciaTotal;
     int cantMov[5];
+    int anguloGiro[3];
 public:
     Trayectoria();
     ~Trayectoria();
@@ -27,4 +28,5 @@ public:
     string getOrdenActual();
     list<string> getOrdenes();
     void getCantOrdenes();
+    void guardarAngulo(string);
 };
