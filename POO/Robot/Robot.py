@@ -1,42 +1,59 @@
-class Trayectoria:
-    def __init__(self, x, y, z, direccion):
-        self.x = x
-        self.y = y
-        self.z = z
-        self.direccion = direccion
-    def guardarTrayectoria(self):
-        pass
+#poner este clase en el servidor
+class Robot:
+    def __init__(self, velocidad, anguloGiro, sentido):#, posicionOrigen, tiempoOperacion, trayectoria, velMaxLineal, velMaxAngular, tipoRobot,configration, efectorFinal, dimensionMax):
 
-class Articulation:
-    def __init__(self, nombre, velocidad, distancia, anguloGiro, sentido):
         self.velocidad = velocidad
-        self.distancia = distancia
+        #self.distancia = distancia
         self.anguloGiro = anguloGiro
         self.sentido = sentido
-    def girar(self, self.anguloGiro):
-        pass
-    def mover(self, self.x, self.y, self.y):
-        pass
+        self.velMaxAngular = 0
+        self.velMaxLineal = 0
+        self.tipoRobot = "3DF"
+        self.configration = "RRR"
+        self.efectorFinal = "pinza"
+        self.dimensionMax = [0, 0, 0]
+        self.b_co = False
+        self.b_ac = False
 
-class Robot:
-    def __init__(self, velocidad, distancia, anguloGiro, sentido, 
-    posicionOrigen, tiempoOperacion, trayectoria, velMaxLineal, velMaxAngular, tipoRobot, 
-    configration, efectorFinal, dimensionMax):
-        self.articlation = Articulation(nombre, velocidad, distancia, anguloGiro, sentido )
-        self.posicionOrigen = posicionOrigen
-        
-    
-    def connectarRobot(self):
-        pass
-    def desconnectarRobot(self):
-        pass
+    def connectarRobot(self, port):
+        #if server receive a request -> identificar el port Serial -> poner un bool a True
+        if(port == "3000"):
+            self.b_co = True
+        else:
+            self.b_co = False
+            print("Wrong Port")
+
+    def desconnectarRobot(self, port):
+        if(port == "3000"):
+            self.b_co = False
+        else:
+            self.b_co = True
+            print("Imposible de desconnectar")
+
     def activar(self):
-        pass
+        #poner un bool a True
+        if(self.b_co):
+            self.b_ac = True
+        else:
+            self.b_ac = False
+            print("El robot tiene que ser connectado")
+    
     def desactivar(self):
-        pass
-    def generarReporte(self):
-        pass
+        #poner un bool a False
+        if(self.b_co & self.b_ac):
+            self.b_ac = False
+        else:
+            self.b_ac = True
+            print("Imposible de desactivar")
+
     def moverPosicionOrigen(self):
+        #poner cada articulaciones a 0
+        #enviar los datos al cliente para poner el robot en su posicion de origen
         pass
     def operarEffector(self):
+        #analizar el reporte por la pinza y hacer lo que dice
+        pass
+    def moverarticulaciones(self):
+        pass
+    def modoautomatica(self):
         pass
