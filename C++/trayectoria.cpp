@@ -1,4 +1,5 @@
 #include "trayectoria.h"
+#include "tiempo.h"
 
 float x;
 float y;
@@ -23,7 +24,8 @@ bool Trayectoria::esOrdenValida(string x){
   }
   guardarAngulo(x);
   //Tiempo una vez ya guardado los ángulos
-  medirtime();
+  //medirtime();
+  Tiempo::medirtime();
   return true;
 }
 
@@ -104,36 +106,12 @@ void Trayectoria::guardarAngulo(string x){
         if(x[index]=='C') istringstream(aux)>>anguloGiro[2];
         
         //Lo coloque acá solo para guardar valores de ángulos válidos.
-        medirtime();
+        //medirtime();
+        Tiempo::medirtime();
         posicion2d(anguloGiro[0],anguloGiro[1],anguloGiro[2]);
       break;
     }
   }
-}
-
-double Trayectoria::gettime() {
-    return this->time;
-}
-
-void Trayectoria::settime(double Nuevo_time) {
-    this->time = Nuevo_time;
-}
-
-double Trayectoria::gettime0() {
-    return this->time0;
-}
-
-void Trayectoria::settime0(double Nuevo_time) {
-    this->time0 = Nuevo_time;
-}
-
-void Trayectoria::medirtime(){
-    double t = clock();
-    Trayectoria::settime(t);
-    stringstream ss;
-    double segundos = (double(Trayectoria::gettime() - Trayectoria::gettime0()) / CLOCKS_PER_SEC);
-    ss << "Instante de inicio orden: " << segundos << " seg" << endl;
-    cout << ss.str() << endl;
 }
 
 double Trayectoria::setPosicionx(int angulo){

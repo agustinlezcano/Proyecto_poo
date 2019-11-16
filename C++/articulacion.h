@@ -1,9 +1,11 @@
-#pragma once
+#ifndef ARTICULACION_H
+#define ARTICULACION_H
+
+#include<iostream>
+using namespace std;
 #include<ctime>
 #include<sstream>
 #include<string>
-#include<iostream>
-using namespace std;
 
 int controlPinza(); //Ésto lo uso para el main
 
@@ -33,3 +35,5 @@ private:
 	int ciclos_totales;
 	string Operacion;
 };
+
+#endif /* ARTICULACION_H */

@@ -3,6 +3,7 @@
 #include <cstdlib>
 #include "trayectoria.h"
 #include "articulacion.h"
+#include "tiempo.h"
 
 using namespace std;
 
