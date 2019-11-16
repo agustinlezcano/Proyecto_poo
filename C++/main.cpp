@@ -4,16 +4,42 @@
 #include "trayectoria.h"
 #include "articulacion.h"
 #include "tiempo.h"
-
 using namespace std;
 
 void emitirReporte(Trayectoria *);
+int controlBrazo();
+int controlPinza();
 
 int main(){
+    cout <<"==========================================="<<endl;
+    cout << "             ORDENES             " << endl << 
+        "1 - Control articulaciones" << endl <<
+        "2 - Control efector final" << endl <<
+        "0 - Salir"<< endl;
+    cout <<"==========================================="<<endl;
+    int ej;
+    bool band = true;
+    while (band) {
+	cout << "Ingrese el número de orden a realizar: ";
+        cin >> ej;
+	switch (ej) {
+	case (0): band = false;
+            break;
+	case (1): controlBrazo();
+            break;
+	case (2): controlPinza();
+            break;
+	default: cout << "Orden NO válida, vuelva a intentarlo." << endl;
+	break;
+	}
+    }    
+}
+
+int controlBrazo(){
     Trayectoria * trayec= new Trayectoria();
     while(true){
         string orden;
-        cout << "*************" << endl << "Ingrese orden:" << endl << 
+        cout << endl << "Ingrese el número de la acción:" << endl << 
         "E - Empezar" << endl <<
         "P - Parar" << endl <<
         "A - Articulacion A" << endl <<
@@ -30,7 +56,7 @@ int main(){
             continue;
         }
         if(trayec->esOrdenValida(orden)){
-            cout << "Orden valida" << endl << endl;
+            cout << "Orden válida" << endl << endl;
             trayec->setOrdenActual(orden);
             trayec->ejecutarOrden();
         }
@@ -60,9 +86,9 @@ int controlPinza() {
     Articulacion *ef;
     ef = new Articulacion();
 	
-    cout << "Desea inicializar?? Y / any:  " << endl;
+    cout << "¿Desea inicializar?? S / N:  " << endl;
     cin >> inicializacion;
-    if (inicializacion == "y" || inicializacion == "Y") {
+    if (inicializacion == "s" || inicializacion == "S") {
 	ef->Inicio();
     } else {
 	cout << "Saliendo..." << endl;
