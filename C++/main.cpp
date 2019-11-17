@@ -4,6 +4,9 @@
 #include "trayectoria.h"
 #include "articulacion.h"
 #include "tiempo.h"
+
+#include "leer.h"
+
 using namespace std;
 
 void emitirReporte(Trayectoria *);
@@ -36,17 +39,39 @@ int main(){
 }
 
 int controlBrazo(){
+    
+    string modo;
+    cout << endl << "Ingrese modo:" << endl << 
+    "A - Modo Automático" << endl <<
+    "M - Modo Manual" << endl;
+    cin >> modo;
+    
     Trayectoria * trayec= new Trayectoria();
+    Leer * lectura = new Leer();
+    
+    string orden;
+    if (modo == "A"){
+        string archivo;
+        cout << "Ingrese archivo para leer: " <<endl;
+        cin >> archivo;
+        lectura->read(archivo);
+        orden=lectura->get_orden();
+    };
+    
+    
     while(true){
-        string orden;
-        cout << endl << "Ingrese el número de la acción:" << endl << 
-        "E - Empezar" << endl <<
-        "P - Parar" << endl <<
-        "A - Articulacion A" << endl <<
-        "B - Articulacion B" << endl <<
-        "C - Articulacion C" << endl <<
-        "T para terminar" << endl;
-        cin >> orden;
+        if (modo == "M"){
+            cout << endl << "Ingrese el número de la acción:" << endl << 
+            "E - Empezar" << endl <<
+            "P - Parar" << endl <<
+            "A - Articulacion A" << endl <<
+            "B - Articulacion B" << endl <<
+            "C - Articulacion C" << endl <<
+            "T para terminar" << endl;
+            cin >> orden;
+            cout << orden << endl;
+        };
+        
         if(orden=="T"){
             delete trayec;
             break;
@@ -59,6 +84,9 @@ int controlBrazo(){
             cout << "Orden válida" << endl << endl;
             trayec->setOrdenActual(orden);
             trayec->ejecutarOrden();
+        }
+        if (modo == "A"){
+            orden="T";
         }
     }
     return 0;
