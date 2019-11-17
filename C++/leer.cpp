@@ -13,7 +13,13 @@ void Leer::read(string archivo){
         myfile.close();
     }
 
-    else cout << "No se pudo abrir el archivo...";  
+    else 
+    {
+        cout << "\nNo se pudo abrir el archivo..." << endl;
+        cout << "Vuelva a intentarlo..." << endl;
+        orden = "ERROR";
+    }    
+    
 }
 
 string Leer::get_orden(){

@@ -52,10 +52,17 @@ int controlBrazo(){
     string orden;
     if (modo == "A"){
         string archivo;
-        cout << "Ingrese archivo para leer: " <<endl;
-        cin >> archivo;
-        lectura->read(archivo);
-        orden=lectura->get_orden();
+        bool status = 1; //Inactivo
+        while (status==1){
+            cout << "Ingrese archivo para leer: " <<endl;
+            cin >> archivo;
+            lectura->read(archivo);
+            orden=lectura->get_orden();
+            
+            if (orden!="ERROR"){
+                status = 0;
+            }
+        }
     };
     
     
@@ -70,7 +77,7 @@ int controlBrazo(){
             "T para terminar" << endl;
             cin >> orden;
             cout << orden << endl;
-        };
+        }
         
         if(orden=="T"){
             delete trayec;
