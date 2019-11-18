@@ -54,12 +54,21 @@ int controlBrazo(){
         string archivo;
         bool status = 1; //Inactivo
         while (status==1){
-            cout << "Ingrese archivo para leer: " <<endl;
-            cin >> archivo;
-            orden=lectura->read(archivo);
+            int aux=0;
+            cout << endl << "1. Cargar rutina \n2. Generar rutina de aprendizaje" << endl;
+            cin >> aux;
+            cout << "\n" <<endl;
+            if (aux==2){
+                lectura->crear_rutina();
+            }
+            if (aux==1){
+                cout << "Ingrese archivo para leer: "<<endl;
+                cin >> archivo;
+                orden=lectura->read(archivo);
             
-            if (orden!="ERROR"){
-                status = 0;
+                if (orden!="ERROR"){
+                    status = 0;
+                }
             }
         }
     };

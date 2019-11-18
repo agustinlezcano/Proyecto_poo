@@ -23,3 +23,35 @@ string Leer::read(string archivo){
     }
     return orden;
 }
+
+void Leer::crear_rutina(){
+    ofstream fout;
+    ifstream fin;
+    
+    string archivo, orden;
+    cout << "Ingrese nombre del archivo a crear: " <<endl;
+    cin >> archivo;
+    
+    int op=1;
+    cout << endl << "Escriba GUARDAR una vez terminado de cargar de ordenes" << endl;
+    cout << "Ingrese orden nueva: " << endl;
+    
+    while (op==1){
+        fin.open(archivo);
+        fout.open(archivo,ios::app);
+        cin >> orden;
+    
+        if ((orden != "GUARDAR")and(fin.is_open())){
+            fout << orden;
+            fout << "\n";
+        }
+    
+        if ((orden == "GUARDAR")or(orden == "guardar")){
+            op=0;
+            cout << "Rutina guardada exitosamente" <<endl;
+        
+        }
+        fin.close();
+        fout.close();
+    }
+}

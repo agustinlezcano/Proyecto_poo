@@ -9,6 +9,7 @@ using namespace std;
 class Leer{
 public:
     string read(string txt);
+    void crear_rutina();
 private:
     string orden;
 };
