@@ -1,7 +1,8 @@
 #include "leer.h"
 
-void Leer::read(string archivo){
+string Leer::read(string archivo){
     string line;
+    string orden;
     ifstream myfile (archivo);
     if (myfile.is_open())
     {
@@ -9,6 +10,7 @@ void Leer::read(string archivo){
         {
             //Por ahora orden es un string y no una lista.
             orden = line;
+            //get_orden(orden);
         }
         myfile.close();
     }
@@ -18,10 +20,6 @@ void Leer::read(string archivo){
         cout << "\nNo se pudo abrir el archivo..." << endl;
         cout << "Vuelva a intentarlo..." << endl;
         orden = "ERROR";
-    }    
-    
-}
-
-string Leer::get_orden(){
-    return this->orden;
+    }
+    return orden;
 }

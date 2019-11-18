@@ -8,8 +8,7 @@ using namespace std;
 
 class Leer{
 public:
-    void read(string txt);
-    string get_orden();
+    string read(string txt);
 private:
     string orden;
 };

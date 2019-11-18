@@ -56,8 +56,7 @@ int controlBrazo(){
         while (status==1){
             cout << "Ingrese archivo para leer: " <<endl;
             cin >> archivo;
-            lectura->read(archivo);
-            orden=lectura->get_orden();
+            orden=lectura->read(archivo);
             
             if (orden!="ERROR"){
                 status = 0;
