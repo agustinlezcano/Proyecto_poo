@@ -1,46 +1,55 @@
 extends CSGMesh
 
-export var speed=2
-var rotate_left
-var rotate_right
-var rotate_up
-var rotate_down
-var rotateValue
-var rotate_base_cw
-var rotate_base_anticw
-var grip
-var ungrip
+var grados = {}
+var t1
+var t2
+var nombre_archivo = '/home/emaa/Escritorio/hola.txt'
+var f
+var t = Timer.new()
 
 func _ready():
-	pass
+	f = File.new()
+	f.open(nombre_archivo, File.READ)
+	t.set_wait_time(0.5)
+	t.connect("timeout",self,"_on_timer_timeout")
+	self.add_child(t)
+	t.start()
+	t1= _fecha_mod(f)
 
-func _process(delta):
-	rotate_left=Input.is_action_pressed("ui_left")
-	rotate_right=Input.is_action_pressed("ui_right")
-	rotate_up=Input.is_action_pressed("ui_up")
-	rotate_down=Input.is_action_pressed("ui_down")
-	rotate_base_anticw=Input.is_key_pressed(KEY_Z)
-	grip=Input.is_key_pressed(KEY_X)
-	ungrip=Input.is_key_pressed(KEY_C)
-	rotate_base_cw=Input.is_key_pressed(KEY_V)
+func _fecha_mod(archivo):
+	return archivo.get_modified_time(nombre_archivo)
+
+func _on_timer_timeout():
+	t2= _fecha_mod(f)
+	if t1!=t2: #archivo modificado!!! leer las ultimas 3 lineas
+		var s_arr = f.get_as_text().split("\n")
+		for i in range (3):
+			grados[str(i)] = s_arr[s_arr.size()-4+i] #de la antepenultima linea para adelante
+		rotar_art1(Vector3(0,grados["0"],0))
+		rotar_art2(Vector3(grados["1"],0,0))
+		rotar_art3(Vector3(0,grados["2"],0))
+	t1 = t2
+	t.start()
+
+func rotar_art1(target):
+	var t = get_node("Tween")
+	t.interpolate_property(self,"rotation_degrees",rotation_degrees,rotation_degrees+target,3.0,Tween.TRANS_QUINT,Tween.EASE_OUT)
+	t.start()
+
+func rotar_art2(target):
+	var t = get_node("Tween")
+	t.interpolate_property($art2,"rotation_degrees",$art2.rotation_degrees,$art2.rotation_degrees+target,3.0,Tween.TRANS_QUINT,Tween.EASE_OUT)
+	t.start()
+
+func rotar_art3(target):
+	var t = get_node("Tween")
+	t.interpolate_property($art2/largo1/art3,"rotation_degrees",$art2/largo1/art3.rotation_degrees,$art2/largo1/art3.rotation_degrees+target,3.0,Tween.TRANS_QUINT,Tween.EASE_OUT)
+	t.start()
 	
-	rotateValue=speed*delta
-	
-	if rotate_base_cw:
-		rotate_y(rotateValue)
-	if rotate_base_anticw:
-		rotate_y(-rotateValue)
-	if rotate_left:
-		$art2.rotate_x(-rotateValue)
-	if rotate_right:
-		$art2.rotate_x(rotateValue)
-	if rotate_up:
-		$art2/largo1/art3.rotate_y(rotateValue)
-	if rotate_down:
-		$art2/largo1/art3.rotate_y(-rotateValue)
-	if grip:
-		$art2/largo1/art3/largo2/gear1.rotate_z(rotateValue)
-		$art2/largo1/art3/largo2/gear2.rotate_z(-rotateValue)
-	if ungrip:
-		$art2/largo1/art3/largo2/gear1.rotate_z(-rotateValue)
-		$art2/largo1/art3/largo2/gear2.rotate_z(rotateValue)
+func rotar_efector(target):
+	var t1 = get_node("Tween")
+	var t2 = get_node("Tween")
+	var target2 = Vector3(20,0,0)
+	t1.interpolate_property($art2/largo1/art3/largo2/gear1,"rotation_degrees",$art2/largo1/art3/largo2/gear1.rotation_degrees,$art2/largo1/art3/largo2/gear1.rotation_degrees+target,3.0,Tween.TRANS_QUINT,Tween.EASE_OUT)
+	t2.interpolate_property($art2/largo1/art3/largo2/gear2,"rotation_degrees",$art2/largo1/art3/largo2/gear2.rotation_degrees,$art2/largo1/art3/largo2/gear2.rotation_degrees+target2,3.0,Tween.TRANS_QUINT,Tween.EASE_OUT)
+	t1.start()
