@@ -27,6 +27,9 @@ public:
 	void sumarciclos();
 	string getOperacion();
 	void parada();
+        
+        bool esOrdenValida(string x);
+        void guardarAngulo(string x);
 
 private:
 	float velocidad = 0;
@@ -34,6 +37,8 @@ private:
 	string Estadostr;
 	int ciclos_totales;
 	string Operacion;
+        
+        int anguloGiro[3];
 };
 
 #endif /* ARTICULACION_H */

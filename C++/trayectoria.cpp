@@ -29,65 +29,6 @@ bool Trayectoria::esOrdenValida(string x){
   return true;
 }
 
-void Trayectoria::setOrdenActual(string ordenActual){
-  this->ordenActual = ordenActual;
-}
-
-void Trayectoria::ejecutarOrden(){
-  for(int i=1;i<ordenActual.length()-1;i+=2){ //saltea los numeros
-    switch (ordenActual[i]){
-      case(IZQUIERDA):
-        Ordenes.push_back("IZQUIERDA");
-        cantMov[0]+=1;       
-        break;
-      case(DERECHA):
-        Ordenes.push_back("DERECHA");
-        cantMov[1]+=1;
-        break;
-      case(AVANZAR):
-        Ordenes.push_back("AVANZAR");
-        cantMov[2]+=1;
-        break;
-      case(RETROCEDER):
-        Ordenes.push_back("RETROCEDER");
-        cantMov[3]+=1;
-        break;
-      case(GIRAR):
-        Ordenes.push_back("GIRAR");
-        cantMov[4]+=1;
-        break;
-    }
-    if(ordenActual[i]!=GIRAR) actualizarEstado();
-    x=0;
-    y=0;
-  }
-}
-
-void Trayectoria::actualizarEstado(){
-  distanciaTotal += sqrt(x*x + y*y);
-}
-
-float Trayectoria::getDistanciaTotal(){
-  return distanciaTotal;
-}
-
-string Trayectoria::getOrdenActual(){
-  return ordenActual;
-}
-
-list<string> Trayectoria::getOrdenes(){
-  return Ordenes;
-}
-
-void Trayectoria::getCantOrdenes(){
-  cout << "Cantidad de movimientos:" << endl << 
-    "IZQUIERDA: " << cantMov[0] << endl <<
-    "DERECHA: " << cantMov[1] << endl << 
-    "AVANZAR: " << cantMov[2] << endl <<
-    "RETROCEDER: " << cantMov[3] << endl <<
-    "GIRAR: " << cantMov[4] << endl; 
-}
-
 void Trayectoria::guardarAngulo(string x){
   int index;
   for(int i=1;i<x.length()-1;i++){

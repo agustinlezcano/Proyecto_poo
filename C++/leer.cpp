@@ -42,8 +42,8 @@ void Leer::crear_rutina(){
         cin >> orden;
     
         if ((orden != "GUARDAR")and(fin.is_open())){
-            fout << orden;
             fout << "\n";
+            fout << orden;
         }
     
         if ((orden == "GUARDAR")or(orden == "guardar")){

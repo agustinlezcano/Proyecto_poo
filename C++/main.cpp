@@ -91,14 +91,9 @@ int controlBrazo(){
             delete trayec;
             break;
         }
-        if(orden=="R"){
-            emitirReporte(trayec);
-            continue;
-        }
+       
         if(trayec->esOrdenValida(orden)){
             cout << "Orden válida" << endl << endl;
-            trayec->setOrdenActual(orden);
-            trayec->ejecutarOrden();
         }
         if (modo == "A"){
             orden="T";
@@ -107,29 +102,18 @@ int controlBrazo(){
     return 0;
 }
 
-void emitirReporte(Trayectoria * T){
-    cout << endl << "Distancia recorrida: " << T->getDistanciaTotal() << " mm" << endl;
-    list<string> ordenes = T->getOrdenes();
-    cout << "Lista de ordenes:" << endl;
-    for(list<string>::iterator it=ordenes.begin();it!=ordenes.end();++it){
-        cout << *it << ", ";
-    }
-    cout<< endl << endl;
-    T->getCantOrdenes();
-}
-
 int controlPinza() {
-    int accion, counter;
+    
+    string modo;
+    Leer * lectura = new Leer();
+    
+    string orden, archivo;
     string inicializacion;
-    stringstream ss;
-    float vel;
-    enum accion {
-	ABRIR, CERRAR, ROTAR, CAMBIAR_VELOCIDAD
-    };
+    
     Articulacion *ef;
     ef = new Articulacion();
 	
-    cout << "¿Desea inicializar?? S / N:  " << endl;
+    cout << "¿Desea inicializar? S / N:  " << endl;
     cin >> inicializacion;
     if (inicializacion == "s" || inicializacion == "S") {
 	ef->Inicio();
@@ -137,52 +121,48 @@ int controlPinza() {
 	cout << "Saliendo..." << endl;
 	ef->setEstado(false); // Falso activo
     }
-    while (ef->getEstado()) {
-	cout << "Elija la acción a realizar: " << endl
-		<< "1. ABRIR" << endl
-		<< "2. CERRAR" << endl
-		<< "3. ROTAR" << endl
-		<< "4. CAMBIAR VELOCIDAD" << endl
-		<< "0. TERMINAR" << endl;
-	cin >> accion;
-	if (accion == 0) {
-		ef->parada();
-		break;
-	}
-	if (accion == 4) {
-		cout << "Ingrese velocidad de giro: " << endl;
-		cin >> vel;
-	}
-	if (accion < 0 || accion > 4) {
-		cout << "Acción NO válida, vuelva a intentarlo." << endl;
-		break;
-	}
-	cout << "Ingrese la cantidad de ciclos que durará la acción seleccionada: ";
-	cin >> counter;
-	for (int i = 0; i < counter; i++) {
-            switch (accion) {
-            case ABRIR: ef->Abrir(i, counter);
-		break;
-            case CERRAR: ef->Cerrar(i, counter);
-		break;
-            case ROTAR: ef->Rotar(i, counter);
-		break;
-            case CAMBIAR_VELOCIDAD: ef->Cambiar_Velocidad(vel, i, counter);
-		break;
-            default: 
-		break;
-            }
-            ss << endl;
-            ss << "Estado de la Pinza: " << ef->getEstadostr() << endl;
-            ss << "Operación en proceso: " << ef->getOperacion() << endl;
-            ss << "Ciclo actual: " << i + 1 << endl;
-            ss << "Ciclos prefijados: " << counter << endl;
-            ss << "Ciclos totales: " << ef->getciclos() << endl;
-            ss << "Velocidad actual: " << ef->getvelocidad() << endl;
-            cout << ss.str() << endl << endl;
-            ss.str("");
-	}
+    
+    cout << endl << "Ingrese modo:" << endl << 
+    "A - Modo Automático" << endl <<
+    "M - Modo Manual" << endl;
+    cin >> modo;
+    
+    if(modo == "A"){
+        cout << "Ingrese archivo para leer: "<<endl;
+        cin >> archivo;
+        orden=lectura->read(archivo);
+        
+        if(ef->esOrdenValida(orden)){
+            cout << "Orden válida" << endl << endl;
+        }
     }
-    delete ef;
+    
+    if (modo == "M"){
+    
+        while (ef->getEstado()) {
+            cout << "Elija la acción a realizar: " << endl <<
+                     "E para Empezar" << endl <<
+                     "P para Parar" << endl <<
+                     "A+ para Abrir" << endl <<
+                     "A- para Cerrar" << endl <<
+                     "R para Rotar" << endl <<
+                     "V para Cambiar velocidad" << endl <<
+                     "T para Terminar" << endl;
+            cin >> orden;
+            
+            if(orden=="T"){
+                delete ef;
+                break;
+            }
+            
+            if(ef->esOrdenValida(orden)){
+                cout << "Orden válida" << endl << endl;
+                delete ef;
+            }
+            if (modo == "A"){
+                orden="T";
+            }
+        } 
+    }
     return 0;
 }
