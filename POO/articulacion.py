@@ -1,14 +1,12 @@
-
-
 class Articulacion:
     def __init__(self):
-        #super().__init__()
-		self.ciclos_totales
-		self.velocidad = 0
-		self.Estado # Activo = FALSE Inactivo = TRUE
-		self.Estadostr
-		self.Operacion    
-        self.anguloGiro
+			self.ciclos_totales = 0
+			self.actual = 0
+			self.velocidad = 0
+			self.Estado # Activo = FALSE Inactivo = TRUE
+			self.Estadostr
+			self.Operacion    
+        	self.anguloGiro
 		
     def Inicio(self):
 	    Articulacion.setEstado(True) # Inactivo

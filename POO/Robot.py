@@ -1,8 +1,7 @@
 #poner este clase en el servidor
-import articulacion.py as arti
+import articulacion as arti
 class Robot(arti.Articulacion):
     def __init__(self, velocidad, anguloGiro, sentido):#, posicionOrigen, tiempoOperacion, trayectoria, velMaxLineal, velMaxAngular, tipoRobot,configration, efectorFinal, dimensionMax):
-
         self.velocidad = velocidad
         #self.distancia = distancia
         self.anguloGiro = anguloGiro
@@ -13,8 +12,8 @@ class Robot(arti.Articulacion):
         self.configration = "RRR"
         self.efectorFinal = "pinza"
         self.dimensionMax = [0, 0, 0]
-        self.b_co = False
-        self.b_ac = False
+        self.b_co = False #bool connectar
+        self.b_ac = False #bool activar
 
     def connectarRobot(self, port):
         #if server receive a request -> identificar el port Serial -> poner un bool a True
@@ -55,13 +54,13 @@ class Robot(arti.Articulacion):
         #analizar el reporte por la pinza y hacer lo que dice
         pass
     def moverarticulaciones(self):
-        print("Elegir el movimiento de la articulaciones")
+        arti = arti.Articulacion()
+        arti.Inicio()
+        print("Elegir entre los opciones")
         print("1 - Abrir")
         print("2 - Cerrar")
         print("3 - Rotar")
         print("4 - Cambiar Velocidad")
-        arti = arti.Articulacion()
-        arti.Inicio()
         e = int(input("Elegir el numero"))
         if e == 1:
             arti.Abrir(arti.actual, arti.ciclo_totales)
@@ -70,9 +69,9 @@ class Robot(arti.Articulacion):
         elif e == 3:
             arti.Rotar(arti.actual, arti.ciclo_totales)
         elif e == 4:
-            arti.velocidad = float(input("Poner una nueva velocidad"))
-            arti.Cambiar_Velocidad(arti.velocidad, arti.actual, arti.ciclo_totales)
-        else: 
+            vel = float(input("Ingresar nueva velocidad"))
+            arti.Cambiar_Velocidad(vel, arti.actual, arti.ciclo_totales)
+        else:
             print("Errores")
         arti.parada()
     def modoautomatica(self):

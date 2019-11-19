@@ -1,6 +1,8 @@
 import cmd, sys
 import IDL as idl
 import Robot as rbt
+import Trayectoria as tr
+import Articulacion as arti
 #from . import Robot.py
 #Class por la ayuda y por los comandos y panel de control
 #mirar a este ejemplo : https://docs.python.org/fr/3/library/cmd.html
@@ -10,51 +12,53 @@ class Comandos(cmd.Cmd):
     """Interprete de comandos"""
     def __init__(self):
         self.r = rbt.Robot(0,0,0,0)
-
+        self.tr = tr.Trayectoria()
+        
     prompt = "Introduza un comando: "
     def do_Conexion(self, args):
-        """Ayuda del .... """
+        """Ayuda de la funcion Conexion : Conectar el robot usando comunicación serial"""
         self.r.connectarRobot("3000")
         if(self.r.b_co):
             print("El robot está conectado")
 
     def do_Deconexion(self, args):
-        """Ayuda del .... """
+        """Ayuda de la funcion Deconexion : Deconectar el robot usando comunicación serial"""
         self.r.desconnectarRobot("3000")
         if(self.r.b_co == False):
             print("El robot está desconectado")
 
     def do_Activar(self, args):
-        """Ayuda del .... """
+        """Ayuda de la funcion Activar : Activacion del Robot"""
         self.r.activar()
         if(self.r.b_co):
             print("El robot está activado")
 
     def do_Desactivar(self, args):
-        """Ayuda del .... """
+        """Ayuda de la funcion Desactivar : Desactivacion del Robot"""
         self.r.desactivar()
         if(self.r.b_ac == False):
             print("El robot está desactivado")
 
     def do_MoverArticulaciones(self, args):
-        """Ayuda del comando1"""
+        """Ayuda de la funcion MoverArticulaciones : Permite de eligir una articulacion y mover la de un angulo"""
         self.r.moverarticulaciones()
-        print("comando1 se ha ejecutado")
+        print("MoverArticulaciones se ha ejecutado")
 
     def do_operarEfector(self, args):
-        """Ayuda del comando2"""
-        self.r.operarEffector()
-        print("comando2 se ha ejecutado")
+        """Ayuda de la funcion operarEfector : Permite de operar el efector : 
+        podemos cerrar, abrir, rotar el efector"""
+        #self.tr.operarEfector(tr.velocidad, tr.ang1, tr.ang2, tr.ang3)
+        print("ooperarEfector se ha ejecutado")
     
     def do_moverPosicionOrigen(self, args):
-        """Ayuda del comando2"""
+        """Ayuda de la funcion moverPosicionOrigen : Permite de volver a la posicion de origen del robot"""
         self.r.moverPosicionOrigen()
-        print("comando2 se ha ejecutado")
+        print("moverPosicionOrigen se ha ejecutado")
 
     def do_ModoAutomatica(self, args):
         """ Ejecutar un reporte con diferentes aciones"""
         self.r.modoautomatica()
-        print("bdfkk")
+        print("ModoAutomatica se ha ejecutado")
 
     def do_salir(self, args):
         """Salir del interprete"""
