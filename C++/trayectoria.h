@@ -17,7 +17,7 @@ private:
     int anguloGiro[3]; 
     //la articulacion A no cambia de posicion, solo rota. Es nuestra referencia (0,0,0)
     double posicion_artB[3];
-    double posicion_artC[3]
+    double posicion_artC[3];
 public:
     Trayectoria();
     ~Trayectoria();

@@ -16,6 +16,7 @@ private:
     double time;
     double timeOp;
     list <double> timeOrdenes;
+    
 public:
     void tiempo(int); //no hace nada (?)
     void medirTime();

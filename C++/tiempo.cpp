@@ -25,10 +25,10 @@ void Tiempo::medirTime(){
     cout << ss.str() << endl;
 }
 
-void setActivityTime(double t){
-    timeOp += t;
+void Tiempo::setActivityTime(double t){
+    timeOp = ++t;
 }
 
-void setOrdenesTime(double t){
+void Tiempo::setOrdenesTime(double t){
     timeOrdenes.insert(timeOrdenes.end(),t);
 }
