@@ -23,18 +23,18 @@ int main(){
     int ej;
     bool band = true;
     while (band) {
-	cout << "Ingrese el número de orden a realizar: ";
-        cin >> ej;
-	switch (ej) {
-	case (0): band = false;
-            break;
-	case (1): controlBrazo();
-            break;
-	case (2): controlPinza();
-            break;
-	default: cout << "Orden NO válida, vuelva a intentarlo." << endl;
-	break;
-	}
+        cout << "Ingrese el número de orden a realizar: ";
+            cin >> ej;
+        switch (ej) {
+        case (0): band = false;
+                break;
+        case (1): controlBrazo();
+                break;
+        case (2): controlPinza();
+                break;
+        default: cout << "Orden NO válida, vuelva a intentarlo." << endl;
+        break;
+        }
     }    
 }
 

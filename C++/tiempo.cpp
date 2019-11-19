@@ -1,26 +1,34 @@
 #include "tiempo.h"
 
-double Tiempo::gettime() {
+double Tiempo::getTime() {
     return this->time;
 }
 
-void Tiempo::settime(double Nuevo_time) {
-    this->time = Nuevo_time;
+void Tiempo::setTime(double new_time) {
+    this->time = new_time;
 }
 
-double Tiempo::gettime0() {
+double Tiempo::getTime0() {
     return this->time0;
 }
 
-void Tiempo::settime0(double Nuevo_time) {
-    this->time0 = Nuevo_time;
+void Tiempo::setTime0(double new_time) {
+    this->time0 = new_time;
 }
 
-void Tiempo::medirtime(){
+void Tiempo::medirTime(){
     double t = clock();
-    Tiempo::settime(t);
+    Tiempo::setTime(t);
     stringstream ss;
-    double segundos = (double(Tiempo::gettime() - Tiempo::gettime0()) / CLOCKS_PER_SEC);
+    double segundos = (double(Tiempo::getTime() - Tiempo::getTime0()) / CLOCKS_PER_SEC);
     ss << "Instante de inicio orden: " << segundos << " seg" << endl;
     cout << ss.str() << endl;
+}
+
+void setActivityTime(double t){
+    timeOp += t;
+}
+
+void setOrdenesTime(double t){
+    timeOrdenes.insert(timeOrdenes.end(),t);
 }

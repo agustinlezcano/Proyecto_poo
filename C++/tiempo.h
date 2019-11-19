@@ -7,18 +7,23 @@
 #include <sstream>
 #include <cmath>
 #include <ctime>
+#include <list>
 using namespace std;
 
 class Tiempo{
 private:
     double time0;
     double time;
+    double timeOp;
+    list <double> timeOrdenes;
 public:
-    void tiempo(int);
-    void medirtime();
-    double gettime();
-    void settime(double time);	
-    double gettime0();
-    void settime0(double time);
+    void tiempo(int); //no hace nada (?)
+    void medirTime();
+    double getTime();
+    void setTime(double);	
+    double getTime0();
+    void setTime0(double);
+    void setActivityTime(double);
+    void setOrdenesTime(double);
 };
 #endif /* TIEMPO_H */

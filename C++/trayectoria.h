@@ -1,9 +1,7 @@
 #ifndef TRAYECTORIA_H
 #define TRAYECTORIA_H
 
-#pragma once
 #include <cstdlib>
-
 #include <iostream>
 #include <list>
 #include <string>
@@ -16,8 +14,10 @@ using namespace std;
 
 class Trayectoria: public Tiempo {
 private:
-    int anguloGiro[3];
-
+    int anguloGiro[3]; 
+    //la articulacion A no cambia de posicion, solo rota. Es nuestra referencia (0,0,0)
+    double posicion_artB[3];
+    double posicion_artC[3]
 public:
     Trayectoria();
     ~Trayectoria();
@@ -25,7 +25,8 @@ public:
     void guardarAngulo(string);
     double setPosicionx(int);
     double setPosiciony(int);
-    void posicion2d(int,int,int);
+    double setPosicionz(int);
+    void posicion(int,int,int);
 };
 
 
