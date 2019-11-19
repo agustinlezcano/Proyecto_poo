@@ -104,41 +104,41 @@ class Trayectoria:
 
 
 
-        def setPosicionX(self, anguloGiro,):
-            #Obtengo la posición en X del brazo
-            #Primero paso el ángulo a radianes (por la librería)
+    def setPosicionX(self, anguloGiro,):
+        #Obtengo la posición en X del brazo
+        #Primero paso el ángulo a radianes (por la librería)
 
-            return(math.cos(math.radians(anguloGiro)))
+        return(math.cos(math.radians(anguloGiro)))
 
-        def setPosicionY(self, anguloGiro,):
-            #Obtengo la posición en Y del brazo
-            #Primero paso el ángulo a radianes (por la librería)
+    def setPosicionY(self, anguloGiro,):
+        #Obtengo la posición en Y del brazo
+        #Primero paso el ángulo a radianes (por la librería)
 
-            return(math.cos(math.radians(anguloGiro)))   
+        return(math.cos(math.radians(anguloGiro)))   
 
-        def setPosicionZ(self, anguloGiro,):
-            #Obtengo la posición en Y del brazo
-            #Primero paso el ángulo a radianes (por la librería)
+    def setPosicionZ(self, anguloGiro,):
+        #Obtengo la posición en Y del brazo
+        #Primero paso el ángulo a radianes (por la librería)
 
-            return(math.cos(math.radians(anguloGiro)))       
-        
-        #Acá abajo en vez de pasar una longitud estática se debe hacer con el atributo tamaño del robot
-        #Lo hago con un def y un set_tamaño
-        #También con un solo argumento ángulo alcanza. Se llama a los atributos de cada objeto
-        def posicion(self, ang1, ang2, ang3):
-            #longitudes de cada articulación
-            l1=10; l2=5; l3=4.5
-            #Posición del brazo A en el plano
-            pos1x = 0
-            pos1y = 0
-            pos1z=0
-            #Posición de la articulacion 1 en el plano
-            pos2x = l2*Trayectoria.setPosicionX(ang2)
-            pos2y = l2*Trayectoria.setPosicionY(ang2)
-            pos2Z = l2*Trayectoria.setPosicionZ(ang2)
-            #Posición de la articulacion 1 en el plano
-            pos3x = l3*setPosicionX(ang3)+pos2x
-            pos3y = l3*setPosicionX(ang3)+pos2y
+        return(math.cos(math.radians(anguloGiro)))       
+    
+    #Acá abajo en vez de pasar una longitud estática se debe hacer con el atributo tamaño del robot
+    #Lo hago con un def y un set_tamaño
+    #También con un solo argumento ángulo alcanza. Se llama a los atributos de cada objeto
+    def posicion(self, ang1, ang2, ang3):
+        #longitudes de cada articulación
+        l1=10; l2=5; l3=4.5
+        #Posición del brazo A en el plano
+        pos1x = 0
+        pos1y = 0
+        pos1z=0
+        #Posición de la articulacion 1 en el plano
+        pos2x = l2*Trayectoria.setPosicionX(ang2)
+        pos2y = l2*Trayectoria.setPosicionY(ang2)
+        pos2Z = l2*Trayectoria.setPosicionZ(ang2)
+        #Posición de la articulacion 1 en el plano
+        pos3x = l3*setPosicionX(ang3)+pos2x
+        pos3y = l3*setPosicionX(ang3)+pos2y
 
 
 

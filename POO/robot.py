@@ -1,8 +1,10 @@
 #poner este clase en el servidor
 import articulacion.py as arti
-class Robot(arti.Articulacion):
-    def __init__(self, velocidad, anguloGiro, sentido):#, posicionOrigen, tiempoOperacion, trayectoria, velMaxLineal, velMaxAngular, tipoRobot,configration, efectorFinal, dimensionMax):
+import trayectoria.py  as tr
 
+class Robot(arti.Articulacion, tr.Trayectoria):
+    def __init__(self, velocidad, anguloGiro, sentido):#, posicionOrigen, tiempoOperacion, trayectoria, velMaxLineal, velMaxAngular, tipoRobot,configration, efectorFinal, dimensionMax):
+        self.tra = tr.Trayectoria()
         self.velocidad = velocidad
         #self.distancia = distancia
         self.anguloGiro = anguloGiro
@@ -52,8 +54,8 @@ class Robot(arti.Articulacion):
         #enviar los datos al cliente para poner el robot en su posicion de origen
         pass
     def operarEffector(self):
-        #analizar el reporte por la pinza y hacer lo que dice
-        pass
+        self.tra.operarEffector(self.tra.velocidad, self.tra.ang1, self.tra.ang2, self.tra.ang3)
+        
     def moverarticulaciones(self):
         print("Elegir el movimiento de la articulaciones")
         print("1 - Abrir")
@@ -75,5 +77,4 @@ class Robot(arti.Articulacion):
         else: 
             print("Errores")
         arti.parada()
-    def modoautomatica(self):
-        pass
+    
