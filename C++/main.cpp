@@ -109,6 +109,7 @@ int controlPinza() {
     
     string orden, archivo;
     string inicializacion;
+    string efector = "pinza";
     
     Articulacion *ef;
     ef = new Articulacion();
@@ -132,7 +133,7 @@ int controlPinza() {
         cin >> archivo;
         orden=lectura->read(archivo);
         
-        if(ef->esOrdenValida(orden)){
+        if(ef->esOrdenValida(orden,efector)){
             cout << "Orden válida" << endl << endl;
         }
     }
@@ -155,7 +156,7 @@ int controlPinza() {
                 break;
             }
             
-            if(ef->esOrdenValida(orden)){
+            if(ef->esOrdenValida(orden,efector)){
                 cout << "Orden válida" << endl << endl;
                 delete ef;
             }

@@ -84,7 +84,8 @@ void Articulacion::parada() {
 
 //Empecé a modificar acá
 
-bool Articulacion::esOrdenValida(string x){
+bool Articulacion::esOrdenValida(string x, string tipoEfector){
+  cout << "Efector: " << tipoEfector << endl;
 //Casos de orden invalida:
 //no comienza con E o termina con P
 //hay caracteres invalidos

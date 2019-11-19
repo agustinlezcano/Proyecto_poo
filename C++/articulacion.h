@@ -28,8 +28,8 @@ public:
 	string getOperacion();
 	void parada();
         
-        bool esOrdenValida(string x);
-        void guardarAngulo(string x);
+        bool esOrdenValida(string,string);
+        void guardarAngulo(string);
 
 private:
 	float velocidad = 0;
