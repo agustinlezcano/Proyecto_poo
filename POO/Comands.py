@@ -1,6 +1,5 @@
 import cmd, sys
 import IDL as idl
-sys.path.insert(0,"C:/Users/anatt/Documents/POO/Robot")
 import Robot as rbt
 #from . import Robot.py
 #Class por la ayuda y por los comandos y panel de control
