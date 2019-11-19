@@ -74,15 +74,15 @@ double Trayectoria::setPosicionz(int angulo){
 void Trayectoria::posicion(int a, int b, int c){
     //Longitudes de cada brazo
     double d1=10,d2=5,d3=4.5;
-    //Posición Brazo A
+    //Posición Brazo A en el plano.
     double p1x=0;
     double p1y=0;
     double p1z=0;
-    //Posición Brazo B
+    //Posición Brazo B en el plano.
     double p2x=d2*(Trayectoria::setPosicionx(b));
     double p2y=d2*(Trayectoria::setPosiciony(b));
     double p2z=d2*(Trayectoria::setPosicionz(b));
-    //Posición Brazo C
+    //Posición Brazo C en el plano.
     double p3x=d3*(Trayectoria::setPosicionx(c)) + p2x;
     double p3y=d3*(Trayectoria::setPosiciony(c)) + p2y;
     double p3z=d3*(Trayectoria::setPosicionz(c)) + p2z;
