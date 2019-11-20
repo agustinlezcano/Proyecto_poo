@@ -74,13 +74,16 @@ int controlBrazo(){
     };
     
     if (modo == "M"){
-        cout << endl << "Ingrese el número de la acción:" << endl << 
-        "E - Empezar" << endl <<
-        "P - Parar" << endl <<
-        "A - Articulacion A" << endl <<
-        "B - Articulacion B" << endl <<
-        "C - Articulacion C" << endl <<
-        "T para terminar" << endl;
+        cout<< "===========================================" << endl;
+        cout<< "          MOVIMIENTO ARTICULACIONES          " << endl;
+        cout<< "===========================================" << endl;
+        cout << "E - Empezar" << endl <<
+                "P - Parar" << endl <<
+                "A - Articulacion A" << endl <<
+                "B - Articulacion B" << endl <<
+                "C - Articulacion C" << endl <<
+                "T para terminar" << endl;
+        cout << endl << "Ingrese el número de la acción: " << endl;
         cin >> orden;
         cout << orden << endl;
     }
@@ -93,7 +96,7 @@ int controlBrazo(){
         cout << "Orden válida" << endl << endl;
         dato1->setAcciones(orden);
         dato1->getAcciones(dato1);
-        cout << "Secuencia: " << dato1->acciones<< endl;
+        cout << "Movimientos: " << dato1->acciones<< endl;
         delete trayec;
     }
     return 0;
@@ -142,16 +145,19 @@ int controlPinza() {
     }
     
     if (modo == "M"){
+        cout<< "===========================================" << endl;
+        cout<< "               ACCIONES               " << endl;
+        cout << "E  para Empezar" << endl <<
+                "P  para Parar" << endl <<
+                "A+ para Abrir" << endl <<
+                "A- para Cerrar" << endl <<
+                "R  para Rotar" << endl <<
+                "V  para Cambiar velocidad" << endl <<
+                "T  para Terminar" << endl;
+        cout<< "===========================================" << endl;
     
         while (ef->getEstado()) {
-            cout << "Elija la acción a realizar: " << endl <<
-                     "E para Empezar" << endl <<
-                     "P para Parar" << endl <<
-                     "A+ para Abrir" << endl <<
-                     "A- para Cerrar" << endl <<
-                     "R para Rotar" << endl <<
-                     "V para Cambiar velocidad" << endl <<
-                     "T para Terminar" << endl;
+            cout << "Elija la acción a realizar: " << endl;
             cin >> orden;
             
             if(orden=="T"){
@@ -160,10 +166,10 @@ int controlPinza() {
             }
             
             if(ef->esOrdenValida(orden,efector)){
-                cout << "Orden válida" << endl << endl;
+                cout << "Orden válida" << endl;
                 dato->setAcciones(orden);
                 dato->getAcciones(dato);
-                cout << "Secuencia: " << dato->acciones<< endl;
+                cout << "Secuencia: " << dato->acciones<< endl<< endl;
                 delete ef;
             }
         } 
