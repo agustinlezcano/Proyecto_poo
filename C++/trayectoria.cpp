@@ -1,8 +1,6 @@
 #include "trayectoria.h"
 #include "tiempo.h"
 
-float x;
-float y;
 const double PI = 3.141592; 
 
 Trayectoria::Trayectoria(){}
@@ -120,3 +118,4 @@ void Trayectoria::setConexion(bool conexion){
 bool Trayectoria::getConexion(){
   return conexion;
 }
+

@@ -8,7 +8,6 @@
 #include <sstream>
 #include <cmath>
 #include <ctime>
-#include "movimiento.h"
 #include "tiempo.h"
 using namespace std;
 
@@ -37,6 +36,7 @@ public:
     
     void setAcciones(string accion);
     string acciones;
+    
 };
 
 

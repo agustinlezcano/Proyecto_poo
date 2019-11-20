@@ -8,7 +8,7 @@ using namespace std;
 #include<string>
 #include <list>
 
-int controlPinza(); //Ésto lo uso para el main
+string controlPinza(); //Ésto lo uso para el main
 
 class Articulacion {
 public:
