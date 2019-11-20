@@ -22,7 +22,7 @@ bool Trayectoria::esOrdenValida(string x){
   }
   guardarAngulo(x);
   //Tiempo una vez ya guardado los ángulos
-  Tiempo::medirTime();
+  //Tiempo::medirTime();
   return true;
 }
 
@@ -46,9 +46,13 @@ void Trayectoria::guardarAngulo(string x){
         Tiempo::setActivityTime(anguloGiro[0]*0.01);
         Tiempo::setActivityTime(anguloGiro[1]*0.01);
         Tiempo::setActivityTime(anguloGiro[2]*0.01);
+        
+        angulo1 = anguloGiro[0];
+        angulo2 = anguloGiro[1];
+        angulo3 = anguloGiro[2];
         //Lo coloque acá solo para guardar valores de ángulos válidos.
-        Tiempo::medirTime();
-        posicion(anguloGiro[0],anguloGiro[1],anguloGiro[2]);
+        //Tiempo::medirTime();
+        //posicion(anguloGiro[0],anguloGiro[1],anguloGiro[2]);
       break;
     }
   }

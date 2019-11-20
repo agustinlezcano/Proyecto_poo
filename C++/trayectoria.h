@@ -36,6 +36,9 @@ public:
     
     void setAcciones(string accion);
     string acciones;
+    int angulo1;
+    int angulo2;
+    int angulo3;
     
 };
 

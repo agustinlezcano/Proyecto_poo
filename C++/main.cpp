@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <cstdlib>
+#include <cstdio>
 #include "trayectoria.h"
 #include "articulacion.h"
 #include "tiempo.h"
@@ -16,7 +17,7 @@ int main(){
     Trayectoria *trayec = new Trayectoria();
     Tiempo *T = new Tiempo();
     string reportArticulacion, reportAcciones;
-
+    
     int ej;
     bool band = true;
     while (band) {
@@ -32,7 +33,7 @@ int main(){
         switch (ej) {
         case (0): band = false;
                 break;
-        case (1): 
+        case (1):
                 reportAcciones=controlBrazo();
                 break;
         case (2): 
@@ -57,6 +58,9 @@ string controlBrazo(){
     Trayectoria * trayec= new Trayectoria();
     Leer * lectura = new Leer();
     Trayectoria * dato1 = new Trayectoria;
+    
+    int angulo1,angulo2,angulo3;
+    Trayectoria * ang1 = new Trayectoria;
     
     string orden;
     if (modo == "A"){
@@ -105,9 +109,17 @@ string controlBrazo(){
         cout << "Orden válida" << endl << endl;
         dato1->setAcciones(orden);
         cout << "Movimientos: " << dato1->acciones<< endl;
+        
+        ang1->guardarAngulo(orden);
+        angulo1 = ang1->angulo1;
+        angulo2 = ang1->angulo2;
+        angulo3 = ang1->angulo3;
+        
         delete trayec;
     }
-    return dato1->acciones;
+    stringstream ss;
+    ss << dato1->acciones << "\n"<< "Ángulos: " << ang1->angulo1 <<"," << ang1->angulo2 <<","<< ang1->angulo3;
+    return ss.str();
 }
 
 string controlPinza() {
@@ -184,7 +196,7 @@ string controlPinza() {
     return dato->acciones;
 }
 
-void emitirReporte(Trayectoria *trayec,Tiempo *T,string reportAcciones, string reportArticulacion){
+void emitirReporte(Trayectoria *trayec,Tiempo *T,string reportAcciones,string reportArticulacion){
 // ==================
 //     Reporte
 // ==================
