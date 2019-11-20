@@ -61,6 +61,11 @@ string controlBrazo(){
     
     int angulo1,angulo2,angulo3;
     Trayectoria * ang1 = new Trayectoria;
+    //ESTOY ACÁ
+    double timer1,timer2,timer3;
+    //Tiempo * timer1 = new Tiempo;
+    //Tiempo * timer2 = new Tiempo;
+    //Tiempo * timer3 = new Tiempo;
     
     string orden;
     if (modo == "A"){
@@ -108,17 +113,25 @@ string controlBrazo(){
     if(trayec->esOrdenValida(orden)){
         cout << "Orden válida" << endl << endl;
         dato1->setAcciones(orden);
-        cout << "Movimientos: " << dato1->acciones<< endl;
+        //cout << "Movimientos: " << dato1->acciones<< endl;
         
         ang1->guardarAngulo(orden);
         angulo1 = ang1->angulo1;
         angulo2 = ang1->angulo2;
         angulo3 = ang1->angulo3;
         
+        //timer1->Tiempo::setActivityTime(angulo1*0.01);
+        //timer2->Tiempo::setActivityTime(angulo2*0.01);
+        //timer3->Tiempo::setActivityTime(angulo3*0.01);
+        //Velocidad angulas, donde k=0.01 es una constante de proporcionalidad
+        timer1 = angulo1*0.01;
+        timer2 = angulo2*0.01;
+        timer3 = angulo3*0.01;
+        
         delete trayec;
     }
     stringstream ss;
-    ss << dato1->acciones << "\n"<< "Ángulos: " << ang1->angulo1 <<"," << ang1->angulo2 <<","<< ang1->angulo3;
+    ss << dato1->acciones << "\n"<< "Ángulos: " << ang1->angulo1 <<"," << ang1->angulo2 <<","<< ang1->angulo3 << "\n"<<"Tiempo instántaneo: "<<timer1<<","<<timer2<<","<<timer3;
     return ss.str();
 }
 
@@ -208,18 +221,18 @@ void emitirReporte(Trayectoria *trayec,Tiempo *T,string reportAcciones,string re
 // Secuencia de movimiento          NO (Carlos lo hace)
     
     stringstream rep;
-    rep << "Conexion: ";
-    if(trayec->getConexion()) rep << "conectado";
-    else rep << "desconectado";
+    //rep << "Conexion: ";
+    //if(trayec->getConexion()) rep << "conectado";
+    //else rep << "desconectado";
 
-    rep << "\nEstado: ";
-    if(trayec->getEstado()) rep << "activado";
-    else rep << "desactivado";
+    //rep << "\nEstado: ";
+    //if(trayec->getEstado()) rep << "activado";
+    //else rep << "desactivado";
     
-    rep << "\nTiempo acumulado: " << T->getActivityTime();
-    rep << "\nCoordenadas:\nArticulacion A: (";//posicion_artA[0] << ", " << posicion_artA[1] << ", " << posicion_artA[2] << ")"
-    rep << "\nArticulacion B: ("; //posicion_artB[0] << ", " << posicion_artB[1] << ", " << posicion_artB[2] << ")"
-    rep << "\nArticulacion C: ("; //posicion_artC[0] << ", " << posicion_artC[1] << ", " << posicion_artC[2] << ")"
+    //rep << "\nTiempo acumulado: " << T->getActivityTime();
+    //rep << "\nCoordenadas:\nArticulacion A: (";//posicion_artA[0] << ", " << posicion_artA[1] << ", " << posicion_artA[2] << ")"
+    //rep << "\nArticulacion B: ("; //posicion_artB[0] << ", " << posicion_artB[1] << ", " << posicion_artB[2] << ")"
+    //rep << "\nArticulacion C: ("; //posicion_artC[0] << ", " << posicion_artC[1] << ", " << posicion_artC[2] << ")"
     rep << "\nSecuenciac de articulación: " << reportAcciones << endl;
     rep << "\nSecuencia de efector: "<< reportArticulacion << endl;
     cout << rep.str() << endl;

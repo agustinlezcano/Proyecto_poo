@@ -40,6 +40,10 @@ public:
     int angulo2;
     int angulo3;
     
+    double timer1;
+    double timer2;
+    double timer3;
+    
 };
 
 

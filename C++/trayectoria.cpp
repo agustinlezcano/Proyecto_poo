@@ -28,6 +28,7 @@ bool Trayectoria::esOrdenValida(string x){
 
 void Trayectoria::guardarAngulo(string x){
   int index;
+  double timer1,timer2,timer3;
   for(int i=1;i<x.length()-1;i++){
     string aux;
     switch(int(x[i])){
@@ -43,13 +44,13 @@ void Trayectoria::guardarAngulo(string x){
         if(x[index]=='B') istringstream(aux)>>anguloGiro[1];
         if(x[index]=='C') istringstream(aux)>>anguloGiro[2];
         
-        Tiempo::setActivityTime(anguloGiro[0]*0.01);
-        Tiempo::setActivityTime(anguloGiro[1]*0.01);
-        Tiempo::setActivityTime(anguloGiro[2]*0.01);
-        
         angulo1 = anguloGiro[0];
         angulo2 = anguloGiro[1];
         angulo3 = anguloGiro[2];
+        
+        //timer1->Tiempo::setActivityTime(angulo1*0.01);
+        //timer2->Tiempo::setActivityTime(angulo2*0.01);
+        //timer3->Tiempo::setActivityTime(angulo3*0.01);
         //Lo coloque acá solo para guardar valores de ángulos válidos.
         //Tiempo::medirTime();
         //posicion(anguloGiro[0],anguloGiro[1],anguloGiro[2]);
