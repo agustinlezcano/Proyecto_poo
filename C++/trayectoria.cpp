@@ -8,7 +8,7 @@ const double PI = 3.141592;
 Trayectoria::Trayectoria(){}
 Trayectoria::~Trayectoria(){}
 
-bool Trayectoria::esOrdenValida(string x){
+bool Trayectoria::esOrdenValida(string x,Trayectoria * trayec){
 //Casos de orden invalida:
 //no comienza con E o termina con P
 //hay caracteres invalidos
@@ -22,13 +22,13 @@ bool Trayectoria::esOrdenValida(string x){
       || ((x[i-1]=='+' || x[i-1]=='-')&&(x[i]-'0'>9 || x[i]-'0'<0)))
       return false; 
   }
-  guardarAngulo(x);
+  trayec->guardarAngulo(x);
   //Tiempo una vez ya guardado los ángulos
   Tiempo::medirTime();
   return true;
 }
 
-void Trayectoria::guardarAngulo(string x){
+void Trayectoria::guardarAngulo(string x,Trayectoria * trayec){
   int index;
   for(int i=1;i<x.length()-1;i++){
     string aux;
@@ -41,14 +41,15 @@ void Trayectoria::guardarAngulo(string x){
           aux += x[i+1];
           i++;
         }
-        if(x[index]=='A') istringstream(aux)>>anguloGiro[0];
-        if(x[index]=='B') istringstream(aux)>>anguloGiro[1];
-        if(x[index]=='C') istringstream(aux)>>anguloGiro[2];
+        int angle;
+        istringstream(aux)>>angle;
+
+        if(x[index]=='A') anguloGiro[0]=angle;
+        if(x[index]=='B') anguloGiro[1]=angle;
+        if(x[index]=='C') anguloGiro[2]=angle;
+
         
-        Tiempo::setActivityTime(anguloGiro[0]*0.01);
-        Tiempo::setActivityTime(anguloGiro[1]*0.01);
-        Tiempo::setActivityTime(anguloGiro[2]*0.01);
-        //Lo coloque acá solo para guardar valores de ángulos válidos.
+        Tiempo::setActivityTime(abs(angle)*0.01);
         Tiempo::medirTime();
         posicion(anguloGiro[0],anguloGiro[1],anguloGiro[2]);
       break;
@@ -56,22 +57,19 @@ void Trayectoria::guardarAngulo(string x){
   }
 }
 
-double Trayectoria::setPosicionx(int angulo){
-    //La librería cmath trabaja con radianes por eso hay que hacer la respectiva conversión.
+double Trayectoria::setPosicionx(int angulo,Trayectoria * trayec){
     return (cos(angulo*PI/180));
 }
 
-double Trayectoria::setPosiciony(int angulo){
-    //La librería cmath trabaja con radianes por eso hay que hacer la respectiva conversión.
+double Trayectoria::setPosiciony(int angulo,Trayectoria * trayec){
     return (cos(angulo*PI/180));
 }
 
-double Trayectoria::setPosicionz(int angulo){
-    //La librería cmath trabaja con radianes por eso hay que hacer la respectiva conversión.
+double Trayectoria::setPosicionz(int angulo,Trayectoria * trayec){
     return (cos(angulo*PI/180));
 }
 
-void Trayectoria::posicion(int a, int b, int c){
+void Trayectoria::posicion(int a, int b, int c,Trayectoria * trayec){
     //Longitudes de cada brazo
     double d1=10,d2=5,d3=4.5;
     //Posición Brazo A en el plano.
@@ -88,23 +86,18 @@ void Trayectoria::posicion(int a, int b, int c){
     double p3z=d3*(Trayectoria::setPosicionz(c)) + p2z;
 }
 
-void Trayectoria::setAcciones(string x){
-    string accion = "[Empezar";
-    for(int index=1;index<x.length()-1;index++){
-        if (x[index]=='A'){
-            accion.append(" Articulación_A");
-          }
-            if (x[index]=='B'){
-            accion.append(" Articulación_B");
-          }
-            if (x[index]=='C'){
-            accion.append(" Articulación_C");
-          }
-    }
-    accion.append(" Parar]");
-    acciones = accion;
+void Trayectoria::setEstado(bool estado,Trayectoria * trayec){
+  this->estado = estado; //1-conectado 0-desconectado
 }
 
-void Trayectoria::getAcciones(Trayectoria * obj){
-    acciones = obj->acciones;
+bool Trayectoria::getEstado(Trayectoria * trayec){
+  return this->estado; //1-activo 0-inactivo
+}
+
+void Trayectoria::setConexion(bool conexion,Trayectoria * trayec){
+  this->conexion = conexion;
+}
+
+bool Trayectoria::getConexion(Trayectoria * trayec){
+  return conexion;
 }

@@ -48,7 +48,6 @@ bool Articulacion::esOrdenValida(string x, string tipoEfector){
 
 void Articulacion::guardarAngulo(string x){
   int index;
-  
   for(int i=1;i<x.length()-1;i++){
     string aux;
     switch(int(x[i])){
@@ -71,28 +70,4 @@ void Articulacion::guardarAngulo(string x){
       break;
     }
   }
-}
-
-void Articulacion::setAcciones(string x){
-    string accion = "[Empezar";
-    for(int index=1;index<x.length()-1;index++){
-        if ((x[index]=='A')and(x[index+1]=='+')){
-            accion.append(" Abrir");
-          }
-            if ((x[index]=='A')and(x[index+1]=='-')){
-            accion.append(" Cerrar");
-          }
-            if (x[index]=='V'){
-            accion.append(" Cambiar_velocidad");
-          }
-            if (x[index]=='R'){
-            accion.append(" Rotar");
-          }
-    }
-    accion.append(" Parar]");
-    acciones = accion;
-}
-
-void Articulacion::getAcciones(Articulacion * obj){
-    acciones = obj->acciones;
 }

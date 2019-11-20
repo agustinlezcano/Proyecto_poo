@@ -4,19 +4,24 @@
 #include "trayectoria.h"
 #include "articulacion.h"
 #include "tiempo.h"
+
 #include "leer.h"
 
 using namespace std;
 
+void emitirReporte(Trayectoria *,Tiempo *);
 int controlBrazo();
 int controlPinza();
 
 int main(){
+    Trayectoria * trayec = new Trayectoria();
+    Tiempo * T = new Tiempo();
     
     cout <<"==========================================="<<endl;
     cout << "             ORDENES             " << endl << 
         "1 - Control articulaciones" << endl <<
         "2 - Control efector final" << endl <<
+        "3 - Emitir Reporte" << endl <<
         "0 - Salir"<< endl;
     cout <<"==========================================="<<endl;
     int ej;
@@ -31,10 +36,15 @@ int main(){
                 break;
         case (2): controlPinza();
                 break;
+        case (3):
+                emitirReporte(trayec,T);
+                break;
         default: cout << "Orden NO válida, vuelva a intentarlo." << endl;
         break;
         }
-    }    
+    }
+    delete trayec;
+    delete T;
 }
 
 int controlBrazo(){
@@ -45,9 +55,8 @@ int controlBrazo(){
     "M - Modo Manual" << endl;
     cin >> modo;
     
-    Trayectoria * trayec= new Trayectoria();
+    //Trayectoria * trayec = new Trayectoria();
     Leer * lectura = new Leer();
-    Trayectoria * dato1 = new Trayectoria;
     
     string orden;
     if (modo == "A"){
@@ -73,28 +82,31 @@ int controlBrazo(){
         }
     };
     
-    if (modo == "M"){
-        cout << endl << "Ingrese el número de la acción:" << endl << 
-        "E - Empezar" << endl <<
-        "P - Parar" << endl <<
-        "A - Articulacion A" << endl <<
-        "B - Articulacion B" << endl <<
-        "C - Articulacion C" << endl <<
-        "T para terminar" << endl;
-        cin >> orden;
-        cout << orden << endl;
-    }
+    
+    while(true){
+        if (modo == "M"){
+            cout << endl << "Ingrese el número de la acción:" << endl << 
+            "E - Empezar" << endl <<
+            "P - Parar" << endl <<
+            "A - Articulacion A" << endl <<
+            "B - Articulacion B" << endl <<
+            "C - Articulacion C" << endl <<
+            "T para terminar" << endl;
+            cin >> orden;
+            cout << orden << endl;
+        }
         
-    if(orden=="T"){
-        delete trayec;
-    }
+        if(orden=="T"){
+            delete trayec;
+            break;
+        }
        
-    if(trayec->esOrdenValida(orden)){
-        cout << "Orden válida" << endl << endl;
-        dato1->setAcciones(orden);
-        dato1->getAcciones(dato1);
-        cout << "Secuencia: " << dato1->acciones<< endl;
-        delete trayec;
+        if(trayec->esOrdenValida(orden)){
+            cout << "Orden válida" << endl << endl;
+        }
+        if (modo == "A"){
+            orden="T";
+        }
     }
     return 0;
 }
@@ -110,9 +122,7 @@ int controlPinza() {
     
     Articulacion *ef;
     ef = new Articulacion();
-    
-    Articulacion * dato = new Articulacion;
-    
+	
     cout << "¿Desea inicializar? S / N:  " << endl;
     cin >> inicializacion;
     if (inicializacion == "s" || inicializacion == "S") {
@@ -134,10 +144,6 @@ int controlPinza() {
         
         if(ef->esOrdenValida(orden,efector)){
             cout << "Orden válida" << endl << endl;
-            dato->setAcciones(orden);
-            dato->getAcciones(dato);
-            cout << "Secuencia: " << dato->acciones<< endl;
-            delete ef;
         }
     }
     
@@ -161,13 +167,40 @@ int controlPinza() {
             
             if(ef->esOrdenValida(orden,efector)){
                 cout << "Orden válida" << endl << endl;
-                dato->setAcciones(orden);
-                dato->getAcciones(dato);
-                cout << "Secuencia: " << dato->acciones<< endl;
                 delete ef;
+            }
+            if (modo == "A"){
+                orden="T";
             }
         } 
     }
-    delete dato;
     return 0;
+}
+
+void emitirReporte(Trayectoria *trayec,Tiempo *T){
+// ==================
+//     Reporte
+// ==================
+// Estado de conexión               LISTO
+// Estado de actividad del robot    LISTO 
+// Instante de tiempo acumulado     LISTO
+// Coordenadas de cada articulación NO (Falta guardar angulos)
+// Velocidad efector final          NO ()
+// Secuencia de movimiento          NO (Carlos lo hace)
+    stringstream rep;
+    rep << "Conexion: ";
+    if(trayec->getConexion()) rep << "conectado";
+    else rep << "desconectado";
+
+    rep << "\nEstado: ";
+    if(trayec->getEstado()) rep << "activado";
+    else rep << "desactivado";
+
+    rep << "\nTiempo acumulado: " << T->getActivityTime();
+    rep << "\nCoordenadas:\nArticulacion A: (";//posicion_artA[0] << ", " << posicion_artA[1] << ", " << posicion_artA[2] << ")"
+    rep << "\nArticulacion B: ("; //posicion_artB[0] << ", " << posicion_artB[1] << ", " << posicion_artB[2] << ")"
+    rep << "\nArticulacion C: ("; //posicion_artC[0] << ", " << posicion_artC[1] << ", " << posicion_artC[2] << ")"
+    rep << "\nVelocidad efector: ";
+    rep << "\nSecuencia de movimiento: ";
+    cout << rep.str() << endl;
 }

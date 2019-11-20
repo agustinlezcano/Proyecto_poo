@@ -6,7 +6,6 @@ using namespace std;
 #include<ctime>
 #include<sstream>
 #include<string>
-#include <list>
 
 int controlPinza(); //Ésto lo uso para el main
 
@@ -19,18 +18,15 @@ public:
 	bool getEstado();
 	void setEstado(bool Nuevo_Estado);
 	string getEstadostr();
+        
         bool esOrdenValida(string,string);
         void guardarAngulo(string);
-        
-        void getAcciones(Articulacion * obj) ;
-        void setAcciones(string accion);
-        string acciones;
-        
+
 private:
-        
 	float velocidad = 0;
 	bool Estado; // Activo = FALSE; Inactivo = TRUE;
 	string Estadostr;
+        
         int anguloGiro[3];
 };
 

@@ -18,6 +18,8 @@ private:
     list <double> timeOrdenes;
     
 public:
+    Tiempo ();
+    ~Tiempo();
     void tiempo(int); //no hace nada (?)
     void medirTime();
     double getTime();
@@ -25,6 +27,7 @@ public:
     double getTime0();
     void setTime0(double);
     void setActivityTime(double);
+    double getActivityTime();
     void setOrdenesTime(double);
 };
 #endif /* TIEMPO_H */

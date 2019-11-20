@@ -16,21 +16,24 @@ class Trayectoria: public Tiempo {
 private:
     int anguloGiro[3]; 
     //la articulacion A no cambia de posicion, solo rota. Es nuestra referencia (0,0,0)
+    double posicion_artA[3];
     double posicion_artB[3];
     double posicion_artC[3];
+    bool conexion;
+    bool estado;
 public:
     Trayectoria();
     ~Trayectoria();
-    bool esOrdenValida(string);
-    void guardarAngulo(string);
-    double setPosicionx(int);
-    double setPosiciony(int);
-    double setPosicionz(int);
-    void posicion(int,int,int);
-    
-    void getAcciones(Trayectoria * obj) ;
-    void setAcciones(string accion);
-    string acciones;
+    void setEstado(bool,Trayectoria *);
+    bool getEstado(Trayectoria *);
+    void setConexion(bool,Trayectoria *);
+    bool getConexion(Trayectoria *);
+    bool esOrdenValida(string,Trayectoria *);
+    void guardarAngulo(string,Trayectoria *);
+    double setPosicionx(int,Trayectoria *);
+    double setPosiciony(int,Trayectoria *);
+    double setPosicionz(int,Trayectoria *);
+    void posicion(int,int,int,Trayectoria *);
 };
 
 

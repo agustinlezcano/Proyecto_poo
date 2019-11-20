@@ -1,5 +1,8 @@
 #include "tiempo.h"
 
+Tiempo::Tiempo(){}
+Tiempo::~Tiempo(){}
+
 double Tiempo::getTime() {
     return this->time;
 }
@@ -26,7 +29,12 @@ void Tiempo::medirTime(){
 }
 
 void Tiempo::setActivityTime(double t){
-    timeOp = ++t;
+    this->timeOp += t;
+    cout << "Tiempo de operacion acumulado: " << (this->timeOp) << endl;
+}
+
+double Tiempo::getActivityTime(){
+    return this->timeOp;
 }
 
 void Tiempo::setOrdenesTime(double t){
