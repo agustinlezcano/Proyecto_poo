@@ -87,3 +87,24 @@ void Trayectoria::posicion(int a, int b, int c){
     double p3y=d3*(Trayectoria::setPosiciony(c)) + p2y;
     double p3z=d3*(Trayectoria::setPosicionz(c)) + p2z;
 }
+
+void Trayectoria::setAcciones(string x){
+    string accion = "[Empezar";
+    for(int index=1;index<x.length()-1;index++){
+        if (x[index]=='A'){
+            accion.append(" Articulación_A");
+          }
+            if (x[index]=='B'){
+            accion.append(" Articulación_B");
+          }
+            if (x[index]=='C'){
+            accion.append(" Articulación_C");
+          }
+    }
+    accion.append(" Parar]");
+    acciones = accion;
+}
+
+void Trayectoria::getAcciones(Trayectoria * obj){
+    acciones = obj->acciones;
+}

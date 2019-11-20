@@ -27,6 +27,10 @@ public:
     double setPosiciony(int);
     double setPosicionz(int);
     void posicion(int,int,int);
+    
+    void getAcciones(Trayectoria * obj) ;
+    void setAcciones(string accion);
+    string acciones;
 };
 
 

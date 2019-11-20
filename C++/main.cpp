@@ -4,16 +4,15 @@
 #include "trayectoria.h"
 #include "articulacion.h"
 #include "tiempo.h"
-
 #include "leer.h"
 
 using namespace std;
 
-void emitirReporte(Trayectoria *);
 int controlBrazo();
 int controlPinza();
 
 int main(){
+    
     cout <<"==========================================="<<endl;
     cout << "             ORDENES             " << endl << 
         "1 - Control articulaciones" << endl <<
@@ -48,6 +47,7 @@ int controlBrazo(){
     
     Trayectoria * trayec= new Trayectoria();
     Leer * lectura = new Leer();
+    Trayectoria * dato1 = new Trayectoria;
     
     string orden;
     if (modo == "A"){
@@ -73,31 +73,28 @@ int controlBrazo(){
         }
     };
     
-    
-    while(true){
-        if (modo == "M"){
-            cout << endl << "Ingrese el número de la acción:" << endl << 
-            "E - Empezar" << endl <<
-            "P - Parar" << endl <<
-            "A - Articulacion A" << endl <<
-            "B - Articulacion B" << endl <<
-            "C - Articulacion C" << endl <<
-            "T para terminar" << endl;
-            cin >> orden;
-            cout << orden << endl;
-        }
+    if (modo == "M"){
+        cout << endl << "Ingrese el número de la acción:" << endl << 
+        "E - Empezar" << endl <<
+        "P - Parar" << endl <<
+        "A - Articulacion A" << endl <<
+        "B - Articulacion B" << endl <<
+        "C - Articulacion C" << endl <<
+        "T para terminar" << endl;
+        cin >> orden;
+        cout << orden << endl;
+    }
         
-        if(orden=="T"){
-            delete trayec;
-            break;
-        }
+    if(orden=="T"){
+        delete trayec;
+    }
        
-        if(trayec->esOrdenValida(orden)){
-            cout << "Orden válida" << endl << endl;
-        }
-        if (modo == "A"){
-            orden="T";
-        }
+    if(trayec->esOrdenValida(orden)){
+        cout << "Orden válida" << endl << endl;
+        dato1->setAcciones(orden);
+        dato1->getAcciones(dato1);
+        cout << "Secuencia: " << dato1->acciones<< endl;
+        delete trayec;
     }
     return 0;
 }
@@ -113,7 +110,9 @@ int controlPinza() {
     
     Articulacion *ef;
     ef = new Articulacion();
-	
+    
+    Articulacion * dato = new Articulacion;
+    
     cout << "¿Desea inicializar? S / N:  " << endl;
     cin >> inicializacion;
     if (inicializacion == "s" || inicializacion == "S") {
@@ -135,6 +134,10 @@ int controlPinza() {
         
         if(ef->esOrdenValida(orden,efector)){
             cout << "Orden válida" << endl << endl;
+            dato->setAcciones(orden);
+            dato->getAcciones(dato);
+            cout << "Secuencia: " << dato->acciones<< endl;
+            delete ef;
         }
     }
     
@@ -158,12 +161,13 @@ int controlPinza() {
             
             if(ef->esOrdenValida(orden,efector)){
                 cout << "Orden válida" << endl << endl;
+                dato->setAcciones(orden);
+                dato->getAcciones(dato);
+                cout << "Secuencia: " << dato->acciones<< endl;
                 delete ef;
-            }
-            if (modo == "A"){
-                orden="T";
             }
         } 
     }
+    delete dato;
     return 0;
 }
