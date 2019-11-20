@@ -74,7 +74,7 @@ void Articulacion::guardarAngulo(string x){
 }
 
 void Articulacion::setAcciones(string x){
-    string accion = "[Empezar";
+    string accion = "[";
     for(int index=1;index<x.length()-1;index++){
         if ((x[index]=='A')and(x[index+1]=='+')){
             accion.append(" Abrir");
@@ -89,10 +89,7 @@ void Articulacion::setAcciones(string x){
             accion.append(" Rotar");
           }
     }
-    accion.append(" Parar]");
+    accion.append(" ]");
     acciones = accion;
 }
 
-void Articulacion::getAcciones(Articulacion * obj){
-    acciones = obj->acciones;
-}

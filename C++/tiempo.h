@@ -25,6 +25,7 @@ public:
     double getTime0();
     void setTime0(double);
     void setActivityTime(double);
+    double getActivityTime();
     void setOrdenesTime(double);
 };
 #endif /* TIEMPO_H */

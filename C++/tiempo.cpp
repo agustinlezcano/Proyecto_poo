@@ -26,7 +26,11 @@ void Tiempo::medirTime(){
 }
 
 void Tiempo::setActivityTime(double t){
-    timeOp = ++t;
+    timeOp += t;
+}
+
+double Tiempo::getActivityTime(){
+    return this->timeOp;
 }
 
 void Tiempo::setOrdenesTime(double t){

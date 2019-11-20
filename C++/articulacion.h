@@ -22,7 +22,6 @@ public:
         bool esOrdenValida(string,string);
         void guardarAngulo(string);
         
-        void getAcciones(Articulacion * obj) ;
         void setAcciones(string accion);
         string acciones;
         

@@ -89,7 +89,7 @@ void Trayectoria::posicion(int a, int b, int c){
 }
 
 void Trayectoria::setAcciones(string x){
-    string accion = "[Empezar";
+    string accion = "[";
     for(int index=1;index<x.length()-1;index++){
         if (x[index]=='A'){
             accion.append(" Articulación_A");
@@ -101,10 +101,22 @@ void Trayectoria::setAcciones(string x){
             accion.append(" Articulación_C");
           }
     }
-    accion.append(" Parar]");
+    accion.append(" ]");
     acciones = accion;
 }
 
-void Trayectoria::getAcciones(Trayectoria * obj){
-    acciones = obj->acciones;
+void Trayectoria::setEstado(bool estado){
+  this->estado = estado; //1-conectado 0-desconectado
+}
+
+bool Trayectoria::getEstado(){
+  return this->estado; //1-activo 0-inactivo
+}
+
+void Trayectoria::setConexion(bool conexion){
+  this->conexion = conexion;
+}
+
+bool Trayectoria::getConexion(){
+  return conexion;
 }
