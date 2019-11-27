@@ -1,6 +1,9 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://ArmCode.gd" type="Script" id=1]
+
+[sub_resource type="Environment" id=16]
+ambient_light_color = Color( 0.266667, 0.266667, 0.266667, 1 )
 
 [sub_resource type="SpatialMaterial" id=1]
 albedo_color = Color( 1, 0, 0, 0.827451 )
@@ -55,16 +58,22 @@ bottom_radius = 0.25
 height = 0.5
 
 [sub_resource type="SpatialMaterial" id=13]
-albedo_color = Color( 0, 1, 0.929412, 1 )
+albedo_color = Color( 0.0666667, 0.839216, 0, 1 )
 
 [sub_resource type="CubeMesh" id=14]
 material = SubResource( 13 )
 size = Vector3( 0.7, 0.15, 0.5 )
 
+[sub_resource type="SpatialMaterial" id=17]
+
+[sub_resource type="PlaneMesh" id=15]
+material = SubResource( 17 )
+
 [node name="Spatial" type="Spatial"]
 
 [node name="Camera" type="Camera" parent="."]
 transform = Transform( -0.713744, 0.335814, -0.614653, -0.000961214, 0.877096, 0.480315, 0.700406, 0.343413, -0.625699, -4.932, 6, -4.775 )
+environment = SubResource( 16 )
 current = true
 size = 8.0
 
@@ -93,17 +102,28 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.25, 0, 0 )
 mesh = SubResource( 10 )
 
 [node name="gear1" type="CSGMesh" parent="art1/art2/largo1/art3/largo2"]
-transform = Transform( 0.999999, -1.90582e-21, -1.42109e-14, 2.13163e-14, -4.37114e-08, -1, 0, 0.999999, -4.37113e-08, 1.25, 1.42109e-14, 0 )
+transform = Transform( 0.999999, -8.47033e-22, 0, 0, -4.37113e-08, -1, 0, 0.999999, -4.37114e-08, 1.25, -9.94075e-09, 4.34524e-16 )
 mesh = SubResource( 12 )
 
 [node name="finger1" type="CSGMesh" parent="art1/art2/largo1/art3/largo2/gear1"]
-transform = Transform( 0.906306, 0.422618, 1.96229e-21, 1.84732e-08, -3.9616e-08, 0.999998, 0.422618, -0.906308, -4.37113e-08, 0.5, 0, 0.3 )
+transform = Transform( 0.906306, 0.422618, 1.90582e-21, 1.84732e-08, -3.9616e-08, 0.999998, 0.422618, -0.906308, -4.37113e-08, 0.5, 3.83042e-15, 0.3 )
 mesh = SubResource( 14 )
 
 [node name="gear2" type="CSGMesh" parent="art1/art2/largo1/art3/largo2"]
-transform = Transform( 0.999999, -1.90582e-21, -1.42109e-14, 2.4869e-14, -4.37114e-08, -1, 0, 0.999999, -4.37113e-08, 1.25, 1.42109e-14, 0 )
+transform = Transform( 0.999999, -8.47033e-22, 0, 0, -4.37113e-08, -1, 0, 0.999999, -4.37114e-08, 1.25, 1.42109e-14, 0 )
 
 [node name="finger2" type="CSGMesh" parent="art1/art2/largo1/art3/largo2/gear2"]
 transform = Transform( 0.906307, -0.422618, 2.71056e-21, -1.84732e-08, -3.9616e-08, 0.999999, -0.422618, -0.906308, -4.37114e-08, 0.499999, 2.10681e-15, -0.3 )
 mesh = SubResource( 14 )
+
+[node name="Ligth" type="DirectionalLight" parent="."]
+transform = Transform( -0.956765, -0.108348, -0.269927, -0.184085, 0.944079, 0.273547, 0.225194, 0.31141, -0.923207, -1.18697, 2.55868, -5.32175 )
+shadow_enabled = true
+shadow_color = Color( 0.25098, 0.25098, 0.25098, 1 )
+
+[node name="Floor" type="MeshInstance" parent="."]
+transform = Transform( 10, 0, 0, 0, 10, 0, 0, 0, 10, 3.2643, 0, 4.23789 )
+mesh = SubResource( 15 )
+skeleton = NodePath("")
+material/0 = null
 
