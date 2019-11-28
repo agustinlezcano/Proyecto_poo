@@ -14,13 +14,13 @@ class Comandos(cmd.Cmd):
     prompt = "Introduza un comando: "
     def do_Conexion(self, args):
         """Ayuda del .... """
-        self.r.connectarRobot("8080")
+        self.r.connectarRobot("3000")
         if(self.r.b_co):
             print("El robot está conectado")
 
     def do_Deconexion(self, args):
         """Ayuda del .... """
-        self.r.desconnectarRobot("8080")
+        self.r.desconnectarRobot("3000")
         if(self.r.b_co == False):
             print("El robot está desconectado")
 

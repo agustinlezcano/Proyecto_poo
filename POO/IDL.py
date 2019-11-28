@@ -1,5 +1,5 @@
-#Este clase permite analizar cada data que viene del servidor
-#Este data he analizado y despues he tratado en la clase Comandos 
+#Esta clase permite analizar los datos que vienen del servidor
+#Los datos analizados son tratados en la clase Comandos 
 #La clase
 from xmlrpc.server import SimpleXMLRPCServer
 from xmlrpc.server import SimpleXMLRPCRequestHandler
@@ -19,15 +19,14 @@ class RequestHandler(SimpleXMLRPCRequestHandler):
 
 
 # Create server
-with SimpleXMLRPCServer(('192.168.0.21', 8080),
+with SimpleXMLRPCServer(('localhost', 8080),
                         requestHandler=RequestHandler) as server:
 #    subprocess.call(['./run_godot.sh'])                    
     server.register_introspection_functions()
-#    server.register_instance(IDL)
 #    server.register_instance(Comandos)
-    def registro(orden):
-        return orden 
-    server.register_function(registro, 'registrar_orden')
+#    def registro(orden):
+#        return orden 
+#    server.register_function(registro, 'registrar_orden')
 
     server.register_instance(Trayectoria)
     server.register_instance(Articulacion)
@@ -42,7 +41,7 @@ with SimpleXMLRPCServer(('192.168.0.21', 8080),
                         "A - Modo Automático"  
                         "M - Modo Manual" )
         
-            if (modo == "A"):
+            if (modo == "A"):               #Enviar una señal desde el cliente
                     #string archivo
                 archivo=input("Ingrese archivo para leer: ")
                 Reporte.read(archivo)
@@ -179,8 +178,7 @@ with SimpleXMLRPCServer(('192.168.0.21', 8080),
         except KeyboardInterrupt:
             print("Exiting")
 #            subprocess.call(['./close_godot.sh'])
-            sys.exit(0)
-            
+            sys.exit(0)       
          
     
   

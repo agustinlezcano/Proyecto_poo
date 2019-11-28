@@ -6,30 +6,37 @@
 #include "articulacion.h"
 #include "tiempo.h"
 #include "leer.h"
+#include "lib/XmlRpc.h"
 
-using namespace std;
+using namespace XmlRpc;
 
 void emitirReporte(Trayectoria *trayec,Tiempo *T,string,string);
 string controlBrazo();
 string controlPinza();
 
-int main(){
+int main(int argc, char* argv[]){
     Trayectoria *trayec = new Trayectoria();
     Tiempo *T = new Tiempo();
     string reportArticulacion, reportAcciones;
     
+    int port = atoi(argv[2]);
+    // Create a client and connect to the server at hostname:port
+    XmlRpcClient client(hostname, port);
+
+    XmlRpcValue noArgs, codigoB, codigoP, result;
+
     int ej;
     bool band = true;
     while (band) {
-        cout <<"==========================================="<<endl;
-        cout << "             ORDENES             " << endl << 
-        "1 - Control articulaciones" << endl <<
-        "2 - Control efector final" << endl <<
-        "3 - Generar reporte" << endl <<
-        "0 - Salir"<< endl;
-        cout <<"==========================================="<<endl;
-        cout << "Ingrese el número de orden a realizar: ";
-            cin >> ej;
+        std::cout <<"==========================================="<<std::endl;
+        std::cout << "             ORDENES             " << std::endl <<
+        "1 - Control articulaciones" << std::endl <<
+        "2 - Control efector final" << std::endl <<
+        "3 - Generar reporte" << std::endl <<
+        "0 - Salir"<< std::endl;
+        std::cout <<"==========================================="<<std::endl;
+        std::cout << "Ingrese el número de orden a realizar: ";
+            std::cin >> ej;
         switch (ej) {
         case (0): band = false;
                 break;
@@ -41,7 +48,7 @@ int main(){
                 break;
         case (3): emitirReporte(trayec,T,reportAcciones,reportArticulacion);
                 break;
-        default: cout << "Orden NO válida, vuelva a intentarlo." << endl;
+        default: std::cout << "Orden NO válida, vuelva a intentarlo." << std::endl;
         break;
         }
     }    
@@ -50,11 +57,13 @@ int main(){
 string controlBrazo(){
     
     string modo;
-    cout << endl << "Ingrese modo:" << endl << 
-    "A - Modo Automático" << endl <<
-    "M - Modo Manual" << endl;
-    cin >> modo;
+    std::cout << std::endl << "Ingrese modo:" << std::endl <<
+    "A - Modo Automático" << std::endl <<
+    "M - Modo Manual" << std::endl;
+    std::cin >> modo;
     
+
+
     Trayectoria * trayec= new Trayectoria();
     Leer * lectura = new Leer();
     Trayectoria * dato1 = new Trayectoria;
@@ -73,15 +82,15 @@ string controlBrazo(){
         bool status = 1; //Inactivo
         while (status==1){
             int aux=0;
-            cout << endl << "1. Cargar rutina \n2. Generar rutina de aprendizaje" << endl;
-            cin >> aux;
-            cout << "\n" <<endl;
+            std::cout << std::endl << "1. Cargar rutina \n2. Generar rutina de aprendizaje" << std::endl;
+            std::cin >> aux;
+            std::cout << "\n" <<std::endl;
             if (aux==2){
                 lectura->crear_rutina();
             }
             if (aux==1){
-                cout << "Ingrese archivo para leer: "<<endl;
-                cin >> archivo;
+                std::cout << "Ingrese archivo para leer: "<<std::endl;
+                std::cin >> archivo;
                 orden=lectura->read(archivo);
             
                 if (orden!="ERROR"){
@@ -92,18 +101,20 @@ string controlBrazo(){
     };
     
     if (modo == "M"){
-        cout<< "===========================================" << endl;
-        cout<< "          MOVIMIENTO ARTICULACIONES          " << endl;
-        cout<< "===========================================" << endl;
-        cout << "E - Empezar" << endl <<
-                "P - Parar" << endl <<
-                "A - Articulacion A" << endl <<
-                "B - Articulacion B" << endl <<
-                "C - Articulacion C" << endl <<
-                "T para terminar" << endl;
-        cout << endl << "Ingrese el número de la acción: " << endl;
-        cin >> orden;
-        cout << orden << endl;
+        std::cout<< "===========================================" << std::endl;
+        std::cout<< "          MOVIMIENTO ARTICULACIONES          " << std::endl;
+        std::cout<< "===========================================" << std::endl;
+        std::cout << "E - Empezar" << std::endl <<
+                "P - Parar" << std::endl <<
+                "A - Articulacion A" << std::endl <<
+                "B - Articulacion B" << std::endl <<
+                "C - Articulacion C" << std::endl <<
+                "T para terminar" << std::endl;
+        std::cout << std::endl << "Ingrese el número de la acción: " << std::endl;
+        std::cin >> orden;
+        std::cout << orden << std::endl;
+        codigoB=orden;
+
     }
         
     if(orden=="T"){
@@ -111,10 +122,13 @@ string controlBrazo(){
     }
        
     if(trayec->esOrdenValida(orden)){
-        cout << "Orden válida" << endl << endl;
+        std::cout << "Orden válida" << std::endl << std::endl;
         dato1->setAcciones(orden);
-        //cout << "Movimientos: " << dato1->acciones<< endl;
-        
+        //std::cout << "Movimientos: " << dato1->acciones<< std::endl;
+        //Envía la señal del movimiento del brazo
+            client.execute("brazo", codigoB, result);
+            std::std::cout << result << std::std::endl;
+
         ang1->guardarAngulo(orden);
         angulo1 = ang1->angulo1;
         angulo2 = ang1->angulo2;
@@ -149,48 +163,48 @@ string controlPinza() {
     
     Articulacion * dato = new Articulacion;
     
-    cout << "¿Desea inicializar? S / N:  " << endl;
-    cin >> inicializacion;
+    std::cout << "¿Desea inicializar? S / N:  " << std::endl;
+    std::cin >> inicializacion;
     if (inicializacion == "s" || inicializacion == "S") {
 	ef->Inicio();
     } else {
-	cout << "Saliendo..." << endl;
+        std::cout << "Saliendo..." << std::endl;
 	ef->setEstado(false); // Falso activo
     }
     
-    cout << endl << "Ingrese modo:" << endl << 
-    "A - Modo Automático" << endl <<
-    "M - Modo Manual" << endl;
-    cin >> modo;
+    std::cout << std::endl << "Ingrese modo:" << std::endl <<
+    "A - Modo Automático" << std::endl <<
+    "M - Modo Manual" << std::endl;
+    std::cin >> modo;
     
     if(modo == "A"){
-        cout << "Ingrese archivo para leer: "<<endl;
-        cin >> archivo;
+        std::cout << "Ingrese archivo para leer: "<<std::endl;
+        std::cin >> archivo;
         orden=lectura->read(archivo);
         
         if(ef->esOrdenValida(orden,efector)){
-            cout << "Orden válida" << endl << endl;
+            std::cout << "Orden válida" << std::endl << std::endl;
             dato->setAcciones(orden);
-            cout << "Secuencia: " << dato->acciones<< endl;
+            std::cout << "Secuencia: " << dato->acciones<< std::endl;
             delete ef;
         }
     }
     
     if (modo == "M"){
-        cout<< "===========================================" << endl;
-        cout<< "               ACCIONES               " << endl;
-        cout << "E  para Empezar" << endl <<
-                "P  para Parar" << endl <<
-                "A+ para Abrir" << endl <<
-                "A- para Cerrar" << endl <<
-                "R  para Rotar" << endl <<
-                "V  para Cambiar velocidad" << endl <<
-                "T  para Terminar" << endl;
-        cout<< "===========================================" << endl;
+        std::cout<< "===========================================" << std::endl;
+        std::cout<< "               ACCIONES               " << std::endl;
+        std::cout << "E  para Empezar" << std::endl <<
+                "P  para Parar" << std::endl <<
+                "A+ para Abrir" << std::endl <<
+                "A- para Cerrar" << std::endl <<
+                "R  para Rotar" << std::endl <<
+                "V  para Cambiar velocidad" << std::endl <<
+                "T  para Terminar" << std::endl;
+        std::cout<< "===========================================" << std::endl;
     
         while (ef->getEstado()) {
-            cout << "Elija la acción a realizar: " << endl;
-            cin >> orden;
+            std::cout << "Elija la acción a realizar: " << std::endl;
+            std::cin >> orden;
             
             if(orden=="T"){
                 delete ef;
@@ -198,9 +212,12 @@ string controlPinza() {
             }
             
             if(ef->esOrdenValida(orden,efector)){
-                cout << "Orden válida" << endl;
+                std::cout << "Orden válida" << std::endl;
                 dato->setAcciones(orden);
-                cout << "Secuencia: " << dato->acciones<< endl<< endl;
+                std::cout << "Secuencia: " << dato->acciones<< std::endl<< std::endl;
+                client.execute("pinza", codigoP, result);
+                std::std::cout << result << std::std::endl;
+
                 delete ef;
             }
         } 
@@ -233,7 +250,7 @@ void emitirReporte(Trayectoria *trayec,Tiempo *T,string reportAcciones,string re
     //rep << "\nCoordenadas:\nArticulacion A: (";//posicion_artA[0] << ", " << posicion_artA[1] << ", " << posicion_artA[2] << ")"
     //rep << "\nArticulacion B: ("; //posicion_artB[0] << ", " << posicion_artB[1] << ", " << posicion_artB[2] << ")"
     //rep << "\nArticulacion C: ("; //posicion_artC[0] << ", " << posicion_artC[1] << ", " << posicion_artC[2] << ")"
-    rep << "\nSecuenciac de articulación: " << reportAcciones << endl;
-    rep << "\nSecuencia de efector: "<< reportArticulacion << endl;
-    cout << rep.str() << endl;
+    rep << "\nSecuenciac de articulación: " << reportAcciones << std::endl;
+    rep << "\nSecuencia de efector: "<< reportArticulacion << std::endl;
+    std::cout << rep.str() << std::endl;
 }

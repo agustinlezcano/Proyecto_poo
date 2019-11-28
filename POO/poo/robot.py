@@ -1,7 +1,7 @@
-#poner este clase en el servidor
-import articulacion as arti
-class Robot(arti.Articulacion):
+
+class Robot:
     def __init__(self, velocidad, anguloGiro, sentido):#, posicionOrigen, tiempoOperacion, trayectoria, velMaxLineal, velMaxAngular, tipoRobot,configration, efectorFinal, dimensionMax):
+
         self.velocidad = velocidad
         #self.distancia = distancia
         self.anguloGiro = anguloGiro
@@ -12,8 +12,8 @@ class Robot(arti.Articulacion):
         self.configration = "RRR"
         self.efectorFinal = "pinza"
         self.dimensionMax = [0, 0, 0]
-        self.b_co = False #bool connectar
-        self.b_ac = False #bool activar
+        self.b_co = False
+        self.b_ac = False
 
     def connectarRobot(self, port):
         #if server receive a request -> identificar el port Serial -> poner un bool a True
@@ -54,25 +54,6 @@ class Robot(arti.Articulacion):
         #analizar el reporte por la pinza y hacer lo que dice
         pass
     def moverarticulaciones(self):
-        arti = arti.Articulacion()
-        arti.Inicio()
-        print("Elegir entre los opciones")
-        print("1 - Abrir")
-        print("2 - Cerrar")
-        print("3 - Rotar")
-        print("4 - Cambiar Velocidad")
-        e = int(input("Elegir el numero"))
-        if e == 1:
-            arti.Abrir(arti.actual, arti.ciclo_totales)
-        elif e == 2:
-            arti.Cerrar(arti.actual, arti.ciclo_totales)
-        elif e == 3:
-            arti.Rotar(arti.actual, arti.ciclo_totales)
-        elif e == 4:
-            vel = float(input("Ingresar nueva velocidad"))
-            arti.Cambiar_Velocidad(vel, arti.actual, arti.ciclo_totales)
-        else:
-            print("Errores")
-        arti.parada()
+        pass
     def modoautomatica(self):
         pass

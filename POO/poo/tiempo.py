@@ -1,6 +1,6 @@
 import time
 
-class Tiempo(self):
+class Tiempo:
     def __init__(self):
         #super().__init__()
         self.time0
@@ -35,7 +35,7 @@ class Tiempo(self):
     
 
     def setActivityTime(self, t):
-        timeOp = t+1
+        self.timeOp += t 
     
 
     def setOrdenesTime(self, t):

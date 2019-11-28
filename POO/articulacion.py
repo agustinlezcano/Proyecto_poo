@@ -83,7 +83,7 @@ if __name__ == "__main__":
     #godot= para_gotod()
     #godot.generarOrden(Trayectoria.anguloGiro1, Trayectoria.anguloGiro2, Trayectoria.anguloGiro3 )
     
-    #Aca estaba el bloque de times
+    #Aca esta el bloque de times
 	#    prueba2.setPosicionX(prueba2.anguloGiro1)
     #	 prueba2.setPosicionY(prueba2.anguloGiro2)
     #    prueba2.setPosicionZ(prueba2.anguloGiro3)
